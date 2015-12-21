@@ -16,6 +16,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ------------------------------------------------------------------------
+# chkconfig: 2345 90 60
+# description: JbossFuse start / stop
 
 # If require, set the JAVA_HOME to launch the wrapper
 #
