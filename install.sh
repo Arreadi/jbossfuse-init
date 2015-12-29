@@ -23,15 +23,11 @@ fi
 TMP=/tmp/.fuse_init.$$
 mkdir $TMP
 cp bin/jbossFuse-service.template ${TMP}/service
-cp etc/jbossFuse-wrapper.conf.template ${TMP}/wrapper
 
 sed -i "s,%JBOSS_FUSE%,${JBOSS_FUSE},g" ${TMP}/service 
-sed -i "s,%JBOSS_FUSE%,${JBOSS_FUSE},g" ${TMP}/wrapper
 cp ${TMP}/service ${JBOSS_FUSE}/bin/jbossFuse-service
-cp ${TMP}/wrapper ${JBOSS_FUSE}/etc/jbossFuse-wrapper.conf
-cp bin/jbossFuse-wrapper ${JBOSS_FUSE}/bin
 rm -rf ${TMP}
 
 ln -s ${JBOSS_FUSE}/bin/jbossFuse-service /etc/init.d/
-chkconfig jbossFuse-service --add
-chkconfig jbossFuse-service on
+chkconfig jbossFuse --add
+chkconfig jbossFuse on
