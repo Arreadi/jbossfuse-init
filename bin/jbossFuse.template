@@ -31,7 +31,7 @@ start() {
 	sleep 20s
 	echo
 	echo -n "Starting containers..."
-	${JBOSS_FUSE}/bin/container-start.sh
+	${JBOSS_FUSE}/bin/containers.sh start
 	echo 
 	return $RETVAL
 }
@@ -40,6 +40,10 @@ stop() {
 	echo -n $"Shutting down Jboss Fuse: "
         ${JBOSS_FUSE}/bin/start
 	echo
+	echo -n "Stopping containers..."
+        ${JBOSS_FUSE}/bin/containers.sh stop
+        echo
+
 	return $RETVAL
 }
 
