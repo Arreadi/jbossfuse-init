@@ -28,6 +28,10 @@ JBOSS_FUSE="%JBOSS_FUSE%"
 start() {
 	echo -n "Starting Jboss Fuse"	
 	${JBOSS_FUSE}/bin/start
+	sleep 20s
+	echo
+	echo -n "Starting containers..."
+	${JBOSS_FUSE}/bin/container-start.sh
 	echo 
 	return $RETVAL
 }
