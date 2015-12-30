@@ -1,4 +1,5 @@
 #!/bin/bash
+JBOSS_FUSE="%JBOSS_FUSE%"
 if [ -z "${JBOSS_FUSE}" ] ; then
 echo "Please, execute: export JBOSS_FUSE=/path/to/jboss/fuse"
 exit 1

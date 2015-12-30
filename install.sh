@@ -23,9 +23,12 @@ fi
 TMP=/tmp/.fuse_init.$$
 mkdir $TMP
 cp bin/jbossFuse.template ${TMP}/service
-cp bin/containers.sh ${JBOSS_FUSE}/bin/
+cp bin/containers.sh ${TMP}/containers
 sed -i "s,%JBOSS_FUSE%,${JBOSS_FUSE},g" ${TMP}/service 
+sed -i "s,%JBOSS_FUSE%,${JBOSS_FUSE},g" ${TMP}/containers
 cp ${TMP}/service ${JBOSS_FUSE}/bin/jbossFuse-service
+cp ${TMP}/containers ${JBOSS_FUSE}/bin/containers.sh
+chmod +x ${JBOSS_FUSE}/bin/containers.sh
 rm -rf ${TMP}
 
 ln -s ${JBOSS_FUSE}/bin/jbossFuse-service /etc/init.d/jbossFuse
