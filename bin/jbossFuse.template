@@ -24,24 +24,44 @@
 RDISCOPTS="-s"
 LOCKFILE=/var/lock/subsys/JbossFuse
 JBOSS_FUSE="%JBOSS_FUSE%"
+RUN_AS_USER="jboss"
 
 start() {
 	echo -n "Starting Jboss Fuse"	
+	if [ ! -z "$RUN_AS_USER" ] ; then 
+	su  $RUN_AS_USER ${JBOSS_FUSE}/bin/start
+	else
 	${JBOSS_FUSE}/bin/start
+	fi
+
 	sleep 20s
 	echo
 	echo -n "Starting containers..."
+	if [ ! -z "$RUN_AS_USER" ] ; then 
+	su  $RUN_AS_USER  ${JBOSS_FUSE}/bin/containers.sh start
+	else
 	${JBOSS_FUSE}/bin/containers.sh start
+	fi
+
 	echo 
 	return $RETVAL
 }
 
 stop() {
 	echo -n $"Shutting down Jboss Fuse: "
-        ${JBOSS_FUSE}/bin/start
+       	if [ ! -z "$RUN_AS_USER" ] ; then 
+	su $RUN_AS_USER ${JBOSS_FUSE}/bin/stop
+	else
+	${JBOSS_FUSE}/bin/stop
+	fi
 	echo
 	echo -n "Stopping containers..."
-        ${JBOSS_FUSE}/bin/containers.sh stop
+	if [ ! -z "$RUN_AS_USER" ] ; then 
+        su $RUN_AS_USER ${JBOSS_FUSE}/bin/containers.sh stop
+	else
+	${JBOSS_FUSE}/bin/containers.sh stop
+	fi
+
         echo
 
 	return $RETVAL
