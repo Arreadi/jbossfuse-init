@@ -26,6 +26,15 @@ LOCKFILE=/var/lock/subsys/JbossFuse
 JBOSS_FUSE="%JBOSS_FUSE%"
 RUN_AS_USER="jboss"
 
+status() {
+
+	if [ ! -z "$RUN_AS_USER" ] ; then
+       	 su  $RUN_AS_USER ${JBOSS_FUSE}/bin/status
+	else
+       	 ${JBOSS_FUSE}/bin/status
+	fi
+}
+
 start() {
 	echo -n "Starting Jboss Fuse"	
 	if [ ! -z "$RUN_AS_USER" ] ; then 
@@ -81,6 +90,9 @@ case "$1" in
 	;;
   stop)
 	stop
+	;;
+  status)
+	status
 	;;
   restart|reload)
 	restart
